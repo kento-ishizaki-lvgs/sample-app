@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sample_app/configs/log.dart';
 import 'package:sample_app/views/page1.dart';
+import 'package:sample_app/views/page2.dart';
+import 'package:sample_app/views/page3.dart';
 
 import 'buttons.dart';
 
@@ -37,6 +39,14 @@ class MyApp extends StatelessWidget {
         path: '/page1',
         builder: (context, state) => const PageOne(),
       ),
+      GoRoute(
+        path: '/page2',
+        builder: (context, state) => const PageTwo(),
+      ),
+      GoRoute(
+        path: '/page3',
+        builder: (context, state) => const PageThree(),
+      ),
     ],
   );
 }
@@ -68,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            elevatedBtn(func: white, title: 'ボタン1'),
+            elevatedBtn(func: goPageOne, title: 'ボタン1'),
             elevatedBtn(func: blue, title: 'ボタン2'),
             elevatedBtn(func: red, title: 'ボタン3'),
             Text(
@@ -85,15 +95,18 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void white() {
-    log('aaaaaaaa');
+  void goPageOne() {
+    log('nav to page one');
+    context.push('/page1');
   }
 
   void blue() {
-    logInfo('bbbbbbb');
+    logInfo('nav to page two');
+    context.push('/page2');
   }
 
   void red() {
-    logError('ccccccccc');
+    logError('nav to page three');
+    context.push('/page3');
   }
 }

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class PaggeTwo extends StatelessWidget {
-  const PaggeTwo({Key? key}) : super(key: key);
+class PageTwo extends StatelessWidget {
+  const PageTwo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('page two'),
+      ),
     );
   }
 }
