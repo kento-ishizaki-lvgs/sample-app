@@ -1,50 +1,44 @@
-import 'dart:developer' as developer;
-
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sample_app/configs/log.dart';
+import 'package:sample_app/views/page1.dart';
 
-// white
-void log(String msg) {
-  developer.log('\x1B[37m$msg\x1B[0m');
-}
-
-// blue
-void logInfo(String msg) {
-  developer.log('\x1B[34m$msg\x1B[0m');
-}
-
-// green
-void logSuccess(String msg) {
-  developer.log('\x1B[32m$msg\x1B[0m');
-}
-
-// yellow
-void logWarning(String msg) {
-  developer.log('\x1B[33m$msg\x1B[0m');
-}
-
-// red
-void logError(String msg) {
-  developer.log('\x1B[31m$msg\x1B[0m');
-}
+import 'buttons.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routeInformationParser: _router.routeInformationParser,
+      routerDelegate: _router.routerDelegate,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo Hoge',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
+
+  final _router = GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const MyHomePage(
+          title: 'Flutter Sample App',
+        ),
+      ),
+      GoRoute(
+        path: '/page1',
+        builder: (context, state) => const PageOne(),
+      ),
+    ],
+  );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -74,11 +68,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // elevatedBtn(func: hoge, title: 'ボタン1'),
-            TextButton(
-              onPressed: hoge,
-              child: Text('hoge'),
-            ),
+            elevatedBtn(func: white, title: 'ボタン1'),
+            elevatedBtn(func: blue, title: 'ボタン2'),
+            elevatedBtn(func: red, title: 'ボタン3'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
@@ -93,7 +85,15 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  void hoge() {
-    log('hoge');
+  void white() {
+    log('aaaaaaaa');
+  }
+
+  void blue() {
+    logInfo('bbbbbbb');
+  }
+
+  void red() {
+    logError('ccccccccc');
   }
 }

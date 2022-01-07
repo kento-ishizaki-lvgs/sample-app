@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 ElevatedButton elevatedBtn({
-  required Function() func,
+  required VoidCallback func,
   required String title,
 }) {
   return ElevatedButton(
     onPressed: func,
-    child: Text(title),
     style: ElevatedButton.styleFrom(),
+    child: Text(title),
   );
 }
