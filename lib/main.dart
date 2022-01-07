@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sample_app/configs/log.dart';
@@ -7,7 +8,9 @@ import 'package:sample_app/views/page3.dart';
 
 import 'buttons.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -107,6 +110,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void red() {
     logError('nav to page three');
-    context.push('/page3');
+    // context.push('/page3');
   }
 }
