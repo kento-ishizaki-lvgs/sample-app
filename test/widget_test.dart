@@ -27,4 +27,24 @@ void main() {
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
   });
+
+  test('成功させる1', () {
+    const hoge = true;
+    expect(hoge, true);
+  });
+
+  test('失敗させる1', () {
+    const hoge = true;
+    expect(hoge, false);
+  });
+
+  test('成功させる2', () {
+    const hoge = true;
+    expect(hoge, true);
+  });
+
+  test('失敗させる2', () {
+    const hoge = true;
+    expect(hoge, false);
+  });
 }
