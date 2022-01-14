@@ -1,10 +1,13 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sample_app/configs/log.dart';
 import 'package:sample_app/views/page1.dart';
 import 'package:sample_app/views/page2.dart';
 import 'package:sample_app/views/page3.dart';
+import 'package:sample_app/views/widget_cheat_sheet.dart';
 
 import 'buttons.dart';
 
@@ -16,6 +19,10 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
+
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +57,12 @@ class MyApp extends StatelessWidget {
         path: '/page3',
         builder: (context, state) => const PageThree(),
       ),
+      GoRoute(
+        path: '/widget_cheat_sheet',
+        builder: (context, state) => const WidgetChearSheet(),
+      ),
     ],
+    observers: [observer],
   );
 }
 
@@ -83,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             elevatedBtn(func: goPageOne, title: 'ボタン1'),
             elevatedBtn(func: blue, title: 'ボタン2'),
-            elevatedBtn(func: red, title: 'ボタン3'),
+            elevatedBtn(func: main, title: 'ボタン3'),
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
@@ -100,16 +112,59 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void goPageOne() {
     log('nav to page one');
+    // FirebaseCrashlytics.instance.crash();
+    FirebaseCrashlytics.instance.log('hello crash log');
     context.push('/page1');
   }
 
-  void blue() {
-    logInfo('nav to page two');
-    context.push('/page2');
+  Future<void> blue() async {
+    // final _params = {'1': 'hoge'};
+    // logInfo('nav to page two');
+    // await FirebaseAnalytics.instance.logEvent(
+    //   name: 'fuga',
+    //   parameters: _params,
+    // );
+    context.push('/widget_cheat_sheet');
   }
 
   void red() {
     logError('nav to page three');
     // context.push('/page3');
+  }
+
+  void main() {
+    // for (var i = 0; i < 10; i++) {
+    //   print(i);
+    // }
+    // print('hoge');
+    // await Future<void>.delayed(Duration(seconds: 1));
+    // final _fruits = ['apple', 'banana', 'grape', 'orange'];
+    // for (var fruit in _fruits) {
+    //   print(fruit);
+    // }
+
+    // _fruits.forEach(print);
+    // final _intro = getSelfIntroduction();
+    // print(_intro);
+    // return 'hoge';
+    final _list = [1, 2, 3, 4, 5];
+
+    // forEach (final i in _list) {
+    //   await hoge(num);
+    // }
+
+    _list.forEach((num) async {
+      await hoge(num);
+    });
+  }
+
+  Future<void> hoge(int i) async {
+    print('遅延前');
+    await Future<void>.delayed(Duration(seconds: 1));
+    print(i);
+  }
+
+  String getSelfIntroduction({String? userName}) {
+    return '私の名前は$userNameです';
   }
 }
