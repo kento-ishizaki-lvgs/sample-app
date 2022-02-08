@@ -1,4 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:sample_app/gen/assets.gen.dart';
+
+enum Sports {
+  soccer,
+  baseball,
+  basketball,
+  swimming,
+}
+
+enum Gender {
+  male,
+  female,
+  other,
+}
+
+Widget btn(VoidCallback action) {
+  return ElevatedButton(
+    onPressed: action,
+    child: Text('コールバック'),
+  );
+}
 
 class WidgetChearSheet extends StatefulWidget {
   const WidgetChearSheet({Key? key}) : super(key: key);
@@ -8,7 +29,9 @@ class WidgetChearSheet extends StatefulWidget {
 }
 
 class _WidgetChearSheetState extends State<WidgetChearSheet> {
-  String? val = 'first';
+  void hoge() {
+    print('aaaaa');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,30 +41,11 @@ class _WidgetChearSheetState extends State<WidgetChearSheet> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const ElevatedButton(
-              onPressed: null,
-              child: Text('Disabled'),
-            ),
-            SizedBox(
-              width: 150,
-              height: 80,
-              child: ElevatedButton(
-                onPressed: () {},
-                onLongPress: () {},
-                style: ElevatedButton.styleFrom(
-                  elevation: 5,
-                  shadowColor: Colors.indigo,
-                  primary: Colors.red,
-                  side: const BorderSide(
-                    color: Colors.brown,
-                    width: 2,
-                  ),
-                  // 角丸化
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(40),
-                  ),
-                ),
-                child: const Text('Enabled'),
+            Transform.scale(
+              scale: 4,
+              child: Assets.images.lion.image(
+                height: 200,
+                width: 200,
               ),
             ),
           ],
