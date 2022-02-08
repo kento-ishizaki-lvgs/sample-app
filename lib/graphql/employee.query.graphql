@@ -1,0 +1,15 @@
+query GetEmployees {
+  employee {
+    id
+    lastName
+    firstName
+  }
+}
+
+query GetAllEmployees {
+  allEmployees {
+    id
+    lastName
+    firstName
+  }
+}

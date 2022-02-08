@@ -4,7 +4,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sample_app/configs/log.dart';
-import 'package:sample_app/views/page1.dart';
+import 'package:sample_app/views/graphql_page.dart';
 import 'package:sample_app/views/page2.dart';
 import 'package:sample_app/views/page3.dart';
 import 'package:sample_app/views/widget_cheat_sheet.dart';
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
       ),
       GoRoute(
         path: '/page1',
-        builder: (context, state) => const PageOne(),
+        builder: (context, state) => const GraphQLPage(),
       ),
       GoRoute(
         path: '/page2',
@@ -152,15 +152,11 @@ class _MyHomePageState extends State<MyHomePage> {
     // forEach (final i in _list) {
     //   await hoge(num);
     // }
-
-    _list.forEach((num) async {
-      await hoge(num);
-    });
   }
 
   Future<void> hoge(int i) async {
     print('遅延前');
-    await Future<void>.delayed(Duration(seconds: 1));
+    await Future<void>.delayed(const Duration(seconds: 1));
     print(i);
   }
 
